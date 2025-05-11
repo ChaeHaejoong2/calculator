@@ -7,21 +7,24 @@ import type { Operator } from "./types/types";
 import OperatorGrid from "./components/OperatorGrid";
 
 export default function App() {
-  const [firstNum, setFirstNum] = useState();
-  const [secondNum, setSecondNum] = useState();
+  const [firstNum, setFirstNum] = useState(0);
+  const [secondNum, setSecondNum] = useState(0);
   const [operator, setOperator] = useState<Operator>("+");
-  const [result, setResult] = useState();
+  const [result, setResult] = useState(0);
 
   const handleOperateClick = () => {
-    setResult(() => {
-      
-    });
-  }
+    setResult();
+  };
 
   return (
     <Wrapper>
-      <Result operator={operator} />
-      <OperatorGrid setOperator={setOperator}  />
+      <Result
+        firstNum={firstNum}
+        secondNum={secondNum}
+        operator={operator}
+        result={result}
+      />
+      <OperatorGrid setOperator={setOperator} />
       <BtnGrid />
     </Wrapper>
   );
