@@ -5,9 +5,9 @@ interface props {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button = ({ value, onClick }: props) => {
+export default function Button({ value, onClick }: props) {
   return <StyledButton onClick={onClick}>{value}</StyledButton>;
-};
+}
 
 const StyledButton = styled.button`
   width: 40px;
@@ -15,5 +15,3 @@ const StyledButton = styled.button`
   font-size: 12px;
   margin: 5px;
 `;
-
-export default Button;

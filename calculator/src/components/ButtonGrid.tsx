@@ -1,12 +1,7 @@
 import styled from "styled-components";
 import Button from "./Button";
-import type { Operator } from "../types/types";
 
-interface BtnGridProps {
-  setOperator: React.Dispatch<React.SetStateAction<Operator>>;
-}
-
-const BtnGrid = ({ setOperator }: BtnGridProps) => {
+export default function ButtonGrid() {
   const buttons = [
     "1",
     "2",
@@ -24,16 +19,12 @@ const BtnGrid = ({ setOperator }: BtnGridProps) => {
 
   return (
     <>
-      <Operator>
-        <Button value="+" onClick={() => setOperator("+")} />
-        <Button value="-" onClick={() => setOperator("-")} />
-        <Button value="*" onClick={() => setOperator("*")} />
-        <Button value="/" onClick={() => setOperator("/")} />
-      </Operator>
       <Calculator>
-        {buttons.map((value, index) => (
-          <Button key={index} value={value} />
-        ))}
+        {buttons.map((value, index) => {
+          if (value === "초기화") return <Button key={index} value={value} />;
+          if (value === "계산") return <Button key={index} value={value} />;
+          return <Button key={index} value={value} />;
+        })}
       </Calculator>
     </>
   );
@@ -48,15 +39,3 @@ const Calculator = styled.div`
   justify-items: center;
   align-items: center;
 `;
-
-const Operator = styled.div`
-  display: grid;
-  width: 100%;
-  gap: 10px;
-  border: 2px solid black;
-  grid-template-columns: repeat(4, 1fr);
-  justify-items: center;
-  align-items: center;
-`;
-
-export default BtnGrid;
