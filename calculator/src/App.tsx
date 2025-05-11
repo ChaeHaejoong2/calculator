@@ -1,6 +1,13 @@
-import "./style.css";
-import ButtonGrid from "./haejoong/ButtonGrid";
+
+import BtnGrid from './components/btnGrid';
+import Result from './components/result';
 
 export default function App() {
-  return <ButtonGrid />;
+  
+  
+  return (
+    <>
+    <BtnGrid/>
+    </>
+  );
 }
