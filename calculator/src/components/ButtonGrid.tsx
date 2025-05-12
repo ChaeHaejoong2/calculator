@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import Button from "./Button";
 
-export default function ButtonGrid() {
+interface ValueProps {
+  setValue: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export default function ButtonGrid({setValue}: ValueProps) {
   const buttons = [
     "1",
     "2",
@@ -16,14 +20,14 @@ export default function ButtonGrid() {
     "0",
     "계산",
   ];
-
+  
   return (
     <>
       <Calculator>
         {buttons.map((value, index) => {
           if (value === "초기화") return <Button key={index} value={value} />;
           if (value === "계산") return <Button key={index} value={value} />;
-          return <Button key={index} value={value} />;
+          return <Button key={index} value={value} onClick={() => setValue(Number(value))} />;
         })}
       </Calculator>
     </>
