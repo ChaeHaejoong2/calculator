@@ -2,37 +2,26 @@ import styled from "styled-components";
 import Button from "./Button";
 
 interface ValueProps {
-  setValue: React.Dispatch<React.SetStateAction<number>>;
+  handleOperateClick: any;
+  handleResetClick: any;
+  handleNumClick: any;
 }
 
-export default function ButtonGrid({setValue}: ValueProps) {
-  const buttons = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "초기화",
-    "0",
-    "계산",
-  ];
-  
+export default function ButtonGrid({ handleOperateClick, handleResetClick, handleNumClick }: ValueProps) {
+  const buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9, "초기화", 0, "계산"];
+
   return (
     <>
       <Calculator>
         {buttons.map((value, index) => {
-          if (value === "초기화") return <Button key={index} value={value} />;
-          if (value === "계산") return <Button key={index} value={value} />;
-          return <Button key={index} value={value} onClick={() => setValue(Number(value))} />;
+          if (value === "초기화") return <Button key={index} value={value} onClick={handleResetClick} />;
+          if (value === "계산") return <Button key={index} value={value} onClick={handleOperateClick} />;
+          return <Button key={index} value={value} onClick={() => handleNumClick(value)} />;
         })}
       </Calculator>
     </>
   );
-};
+}
 
 const Calculator = styled.div`
   width: 100%;

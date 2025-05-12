@@ -7,12 +7,12 @@ interface OperatorProps {
 }
 
 export default function OperatorGrid({ setOperator }: OperatorProps) {
+  const buttons = ["+", "-", "*", "/"];
   return (
     <Wrapper>
-      <Button value="+" onClick={() => setOperator("+")} />
-      <Button value="-" onClick={() => setOperator("-")} />
-      <Button value="*" onClick={() => setOperator("*")} />
-      <Button value="/" onClick={() => setOperator("/")} />
+      {buttons.map((v, i) => (
+        <Button key={i} value={v} onClick={() => setOperator(v as Operator)} />
+      ))}
     </Wrapper>
   );
 }

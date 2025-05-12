@@ -1,40 +1,25 @@
 import styled from "styled-components";
 import type { Operator } from "../types/types";
-import React, {useState, useEffect} from "react";
 
 interface ResultProps {
-  firstNum: string;
-  setFirstNum: React.Dispatch<React.SetStateAction<string>>;
-  secondNum: string;
-  setSecondNum: React.Dispatch<React.SetStateAction<string>>;
+  firstNum: number;
+  secondNum: number;
   operator: Operator;
   result: number;
-  value: number;
-  setValue: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedBox: any;
 }
 
-const Result = ({ firstNum, setFirstNum, secondNum, setSecondNum, operator, result, value ,setValue}: ResultProps) => {
-  const [selectedBox, setSelectedBox] = useState("firstBox");
-
-  useEffect(() => {
-    if (selectedBox === "firstBox") {
-      setFirstNum((prevFirstNum) => prevFirstNum + value);
-    } else if (selectedBox === "secondBox") {
-      setSecondNum((prevSecondNum) => prevSecondNum + value);
-    }
-  }, [selectedBox, value, setFirstNum, setSecondNum]);    
-  
-
+export default function Result({ firstNum, secondNum, operator, result, setSelectedBox }: ResultProps) {
   return (
     <Wrapper>
       <Input value={firstNum} onClick={() => setSelectedBox("firstBox")} readOnly />
-      <div>{operator}</div>
+      {operator}
       <Input value={secondNum} onClick={() => setSelectedBox("secondBox")} readOnly />
       {"="}
       <Input value={result} readOnly />
     </Wrapper>
   );
-};
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -49,5 +34,3 @@ const Input = styled.input`
   font-size: 20px;
   text-align: center;
 `;
-
-export default Result;
