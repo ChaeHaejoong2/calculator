@@ -8,32 +8,58 @@ import OperatorGrid from "./components/OperatorGrid";
 
 
 export default function App() {
-  const [firstNum, setFirstNum] = useState("");
-  const [secondNum, setSecondNum] = useState("");
+  const [firstNum, setFirstNum] = useState(0);
+  const [secondNum, setSecondNum] = useState(0);
   const [operator, setOperator] = useState<Operator>("+");
   const [result, setResult] = useState(0);
-  const [value, setValue] = useState(0);
+  const [selectedBox, setSelectedBox] = useState("firstBox");
 
-
+  const handleNumClick = (num: number) => {
+    if (selectedBox === "firstBox") {
+      setFirstNum((prevFirstNum) => Number(String(prevFirstNum) + String(num)));
+    } else if (selectedBox === "secondBox") {
+      setSecondNum((prevSecondNum) => Number(String(prevSecondNum) + String(num)));
+    }
+  }
+    
+  const handleResetClick = () => {
+    setResult(0);
+    setFirstNum(0);
+    setSecondNum(0);
+    setOperator("+");
+    setSelectedBox("firstBox");
+  };
 
   const handleOperateClick = () => {
-    setResult(0);
-  };
+    setResult(() => {
+      switch(operator) {
+        case("+") :
+          return firstNum + secondNum;
+        case("-") :
+          return firstNum - secondNum;
+        case("*") :
+          return firstNum * secondNum;
+        case("/") :
+          return firstNum / secondNum;
+      }
+    })
+  }
 
   return (
     <Wrapper>
       <Result
         firstNum={firstNum}
-        setFirstNum={setFirstNum}
         secondNum={secondNum}
-        setSecondNum={setSecondNum}
         operator={operator}
         result={result}
-        value={value}
-        setValue={setValue}
+        setSelectedBox={setSelectedBox}
       />
       <OperatorGrid setOperator={setOperator} />
-      <BtnGrid setValue={setValue} />
+      <BtnGrid 
+       handleNumClick={handleNumClick}
+       handleResetClick={handleResetClick}
+       handleOperateClick={handleOperateClick}
+      />
     </Wrapper>
   );
 }
